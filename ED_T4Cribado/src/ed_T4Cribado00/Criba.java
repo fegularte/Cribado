@@ -9,10 +9,8 @@ public class Criba {
 			Scanner teclado= new Scanner(System.in);
 			System.out.println("Introducir un valor tope para la criba de Erastótenes:");
 			int dato= teclado.nextInt();
-			
 			//instancia de criba
-			Criba vector = new Criba((int) dato);
-			
+			Criba vector = new Criba((int) dato);			
 	}
 	
 	//atributos
