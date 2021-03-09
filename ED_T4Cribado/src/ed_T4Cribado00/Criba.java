@@ -3,6 +3,12 @@ package ed_T4Cribado00;
 import java.util.Scanner;
 
 public class Criba {
+	
+	/**
+	 * @author Fede Gularte
+	 *@literal ED 2020/21 Práctica 4 - Refactorización (pruebas JUnit) + Versionado con EGit/Github 
+	 */
+	 
 	//método principal de la aplicación
 	public static void main(String[] args) {
 		//tomar valor tope del usuario
