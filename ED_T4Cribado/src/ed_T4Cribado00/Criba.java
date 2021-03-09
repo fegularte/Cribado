@@ -10,24 +10,29 @@ public class Criba {
 			System.out.println("Introducir un valor tope para la criba de Erastótenes:");
 			int dato= teclado.nextInt();
 			//instancia de criba
-			Criba vector = new Criba((int) dato);			
+			Criba vector = new Criba((int) dato);
+			vector.getNumEncuentros();
+			vector.getPrimos();
 	}
 	
 	//atributos
 	private int tope;
+	private int totalPrimos;
+	private boolean[] esPrimo;
 	private int[] primos;
+	
 	//contructor
 		public Criba(int max){
-			this.tope= max;
+			this.tope= max + 1;
 			this.inicio();
 			return;
 		}
 	//método de feedback inicial usado por el constructor
 	public boolean inicio() {
-		if(tope >= 2) {
+		if(tope-1 >= 2) {
 			//mostrar la serie inicial de números ayudandonos de un vector
-			int vector[]= new int[tope];
-			System.out.println("\nSerie de números de partida (hasta " + tope + "): ");
+			int vector[]= new int[tope-1];
+			System.out.println("\nSerie de números de partida (hasta " + (tope - 1) + "): ");
 			//recorremos vector para mostrar sus indices hasta tope
 			for(int i=0; i<vector.length; i++) {
 				// mostramos serie inicial de números de partida
@@ -42,20 +47,18 @@ public class Criba {
 			return false;
 		}
 	}
-	
+
 	//generar números primos de 1 a max definido por user
-	public boolean generarPrimos() {
-			int i, j;
-			//array boolean de aciertos
-			boolean [] esPrimo = new boolean[tope];
+	public boolean[] generarPrimos() {
+			int i, j;		
+			esPrimo= new boolean[tope];
 			//inicilizacion array aciertos
 			for( i=0; i<tope; i++) {
 				//inicialmente categorizamos todos como true
 				esPrimo[i] = true;
-				//eliminamos el 0 
-				esPrimo[0] =  false;
+				//eliminamos el 0 y el 1
+				esPrimo[0] = false;
 			}
-			
 			//cribado
 			for(i=2; i<Math.sqrt(tope)+1; i++) {
 				//si valor de indice actual del array es true...
@@ -66,18 +69,31 @@ public class Criba {
 					}
 				}
 			}
-				
-			//contar los nºs primos que hay finalmente
-			int totalPrimos= 0;
-			for(i=0; i<tope; i++) {
+			return esPrimo;
+	}
+	
+	//método contador de nºs primos encontrados
+	public int getNumEncuentros() {
+		if(tope -1 >= 2 ) {
+			for(int i=0; i<tope; i++) {
 				//si la posición actual es true = no tachado = primo
 				if(esPrimo[i]) {
 					//aumentamos contador
 					totalPrimos++;
 				}
 			}
-			System.out.println("\nTotal nºs primos encontrados: " + totalPrimos);
-				
+			System.out.println("\nTotal números primos encontrados: " + totalPrimos);
+			return totalPrimos;
+		}else {
+			totalPrimos= 0;
+			System.out.println("\nTotal números primos encontrados: " + totalPrimos);
+			return totalPrimos;
+		}
+	}
+	//método que monta y muestra el resultado
+	public boolean getPrimos() {
+		if(tope-1 >= 2 && totalPrimos != 0) {
+			int i, j;
 			//almacenar los primos en un array de primos
 			primos= new int[totalPrimos];
 			for(i=0, j=0; i<tope; i++) {
@@ -94,6 +110,8 @@ public class Criba {
 				System.out.print("\t" + primos[i]);
 			}
 			return true;
+		}else {
+			return false;
+		}
 	}
-	
 }
